@@ -35,7 +35,7 @@ banner()
 
 print("\n" + colors.GREEN + "-"*80 + "\n" + colors.END)
 
-url = input(str(colors.PURPLE + "█ " + colors.GRAY + "Ingrese la URL" + colors.PURPLE + " ~> " + colors.END))
+url = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the URL" + colors.PURPLE + " ~> " + colors.END))
 user = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the username" + colors.PURPLE + " ~> " + colors.END))
 
 n_t = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "How many threads do you want to use?" + colors.PURPLE + " ~> " + colors.END))
