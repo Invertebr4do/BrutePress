@@ -6,6 +6,6 @@ Herramienta creada en **python3** para aplicar fuerza bruta al panel de login de
 
 ```bash
 git clone https://github.com/Invertebr4do/BrutePress
-cd BrutePress && chmod +x BrutePress.sh
+cd BrutePress && chmod +x BrutePress.py
 ./BrutePress.py
 ```
