@@ -1,6 +1,6 @@
 # BrutePress
 
-Herramienta creada en **python3** para aplicar fuerza bruta a un panel de login de wordpress
+Herramienta creada en **python3** para aplicar fuerza bruta al panel de login de wordpress
 
 ## Instalación:
 
