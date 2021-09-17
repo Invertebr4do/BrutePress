@@ -120,17 +120,7 @@ def makeRequest():
 		}
 
 		r = requests.post(url.rstrip("\n"), data=data, cookies=cookie)
-
-		if r.status_code != 200:
-			print(colors.RED + "\n[!] Invalid url or you don\'t have connecion" + colors.END)
-
-			if threading.activeCount() > 1:
-				os.system("tput cnorm")
-				os._exit(getattr(os, "_exitcode", 0))
-			else:
-				os.system("tput cnorm")
-				sys.exit(getattr(os, "_exitcode", 0))
-
+		
 		p1.status("%s" % i)
 
 		if language.lower().rstrip("\n") == "en":
