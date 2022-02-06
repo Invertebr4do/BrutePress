@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 
 import signal
+import requests
 import time
 from pwn import *
 
