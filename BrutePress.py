@@ -19,7 +19,7 @@ class colors():
 def def_handler(signal, frame):
 	print(colors.RED + "\n[!] Exiting...\n" + colors.END)
 
-	if threading.activeCount() > 1:
+	if threading.active_count() > 1:
 		os.system("tput cnorm")
 		os._exit(getattr(os, "_exitcode", 0))
 	else:
@@ -120,7 +120,7 @@ def makeRequest():
 			'testcookie': '1'
 		}
 
-		r = requests.post(url.rstrip("\n"), data=data, cookies=cookie)
+		r = requests.post(url.rstrip("\n"), data=data, cookies=cookie, verify=False)
 		
 		p1.status("%s" % i)
 
@@ -128,7 +128,7 @@ def makeRequest():
 			if "incorrect" not in r.text:
 				p1.success("%s" % i)
 
-				if threading.activeCount() > 1:
+				if threading.active_count() > 1:
 					os.system("tput cnorm")
 					os._exit(getattr(os, "_exitcode", 0))
 				else:
@@ -139,7 +139,7 @@ def makeRequest():
 			if "correcta." not in r.text:
 				p1.success("%s" % i)
 
-				if threading.activeCount() > 1:
+				if threading.active_count() > 1:
 					os.system("tput cnorm")
 					os._exit(getattr(os, "_exitcode", 0))
 				else:
