@@ -4,7 +4,6 @@ import requests
 import signal
 import time
 from pwn import *
-import pdb
 
 #Colors
 class colors():
