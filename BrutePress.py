@@ -34,7 +34,7 @@ def banner():
 
 banner()
 
-print("\n" + colors.GREEN + "-"*80 + "\n" + colors.END)
+print("\n" + colors.GREEN + "─"*120 + "\n" + colors.END)
 
 while True:
 	url = input(str(colors.PURPLE + "█ " + colors.GRAY + "Enter the URL" + colors.PURPLE + " ~> " + colors.END).rstrip("\n"))
@@ -103,7 +103,7 @@ while True:
 	else:
 		print(colors.RED + "\n[!] Invalid option" + colors.END)
 
-print("\n" + colors.PURPLE + "-"*80 + "\n" + colors.END)
+print("\n" + colors.PURPLE + "─"*80 + "\n" + colors.END)
 
 p2 = log.info("Bruteforcing %s" % user)
 p1 = log.progress("Password")
