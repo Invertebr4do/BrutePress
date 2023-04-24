@@ -8,6 +8,16 @@ Herramienta creada en **python3** para aplicar fuerza bruta al panel de login de
 
 ```bash
 git clone https://github.com/Invertebr4do/BrutePress
-cd BrutePress && chmod +x BrutePress.py
-./BrutePress.py
+cd BrutePress && chmod +x *.py
+```
+## Ejecución
+ - Para atacar el xmlrpc.php (_Recomendado_):
+
+```bash
+./BrutePress-XMLRPC.py 
+```
+ - Para atacar directamente el panel de login:
+ 
+ ```bash
+./BrutePress.py 
 ```
