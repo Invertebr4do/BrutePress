@@ -91,13 +91,13 @@ while True:
 	if WDictionary.upper().rstrip("\n") == 'Y':
 		try:
 			wordlist = input(str(colors.PURPLE + "\n█ " + colors.GRAY + "Enter the wordlist path" + colors.PURPLE + " ~> " + colors.END))
-			dictionary = open(wordlist.rstrip("\n"), 'rb')
+			dictionary = open(wordlist.rstrip("\n"), 'r')
 			break
 		except:
 			print(colors.RED + "\n[!] Invalid path" + colors.END)
 
 	elif WDictionary.upper().rstrip("\n") == 'N':
-		dictionary = open("/usr/share/wordlists/rockyou.txt", 'rb')
+		dictionary = open("/usr/share/wordlists/rockyou.txt", 'r')
 		break
 
 	else:
